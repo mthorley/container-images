@@ -50,6 +50,6 @@ jobs:
           context: ${{ steps.prep.outputs.base_dir }}/
           file: ${{ steps.prep.outputs.base_dir }}/Dockerfile
           platforms: linux/arm64
-          push: false
+          push: true
           tags: |
             mthorley/node-red:${{ github.sha }}
