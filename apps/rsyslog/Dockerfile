@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM arm64v8/ubuntu
 
 RUN apt update && apt install rsyslog -y
 
