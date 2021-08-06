@@ -11,8 +11,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-prettify": "^0.1.1",
-    "moment": "^2.29.0",
-    "request": "^2.88.2",
-    "request-promise": "^4.2.6"
+    "moment": "^2.29.1",
+    "urllib": "^2.37.3"
   }
 }

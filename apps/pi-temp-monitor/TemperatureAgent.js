@@ -3,7 +3,8 @@
 const express = require('express');
 const pretty = require('express-prettify');
 const exec = require('child_process').exec;
-const rp = require('request-promise');
+//const rp = require('request-promise');
+const urllib = require('urllib');
 const moment = require('moment');
 const app = express();
 const port = 5000;
@@ -36,7 +37,8 @@ app.get('/api/get-cluster-temp', async (req, resp) => {
     var podIpList = podIpList.filter((item) => { return item.trim() != '' });
     var result = [];
     for (let i = 1; i < podIpList.length; i++) {
-        await rp(`http://${podIpList[i]}:5000/api/get-node-temp`).then(body => {
+//        await rp(`http://${podIpList[i]}:5000/api/get-node-temp`).then(body => {
+        await urllib.request('http://${podIpList[i]}:5000/api/get-node-temp').then(body => {
             result.push(JSON.parse(body));
         }).catch(err => {
             console.log(err);
