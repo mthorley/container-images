@@ -42,25 +42,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build
-        uses: docker/build-push-action@v2
-        with:
-          context: ${{ steps.prep.outputs.base_dir }}/
-          load: true
-          tags: |
-            mthorley/node-red:${{ github.sha }}
-
-      - name: Vuln scan
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: 'mthorley/node-red:${{ github.sha }}'
-          format: 'table'
-#          exit-code: '1'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
-
-      - name: Push
+      - name: Build and Push
         uses: docker/build-push-action@v2
         with:
           context: ${{ steps.prep.outputs.base_dir }}/
@@ -68,3 +50,22 @@ jobs:
           tags: |
             mthorley/node-red:${{ github.sha }}
             mthorley/node-red:${{ steps.prep.outputs.version }}
+
+#      - name: Vuln scan
+#        uses: aquasecurity/trivy-action@master
+#        with:
+#          image-ref: 'mthorley/node-red:${{ github.sha }}'
+#          format: 'table'
+#          exit-code: '1'
+#          ignore-unfixed: true
+#          vuln-type: 'os,library'
+#          severity: 'CRITICAL,HIGH'
+
+#      - name: Push
+#        uses: docker/build-push-action@v2
+#        with:
+#          context: ${{ steps.prep.outputs.base_dir }}/
+#          push: true
+#          tags: |
+#            mthorley/node-red:${{ github.sha }}
+#            mthorley/node-red:${{ steps.prep.outputs.version }}
