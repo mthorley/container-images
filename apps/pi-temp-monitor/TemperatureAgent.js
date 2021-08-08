@@ -38,7 +38,8 @@ app.get('/api/get-cluster-temp', async (req, resp) => {
     var result = [];
     for (let i = 1; i < podIpList.length; i++) {
 //        await rp(`http://${podIpList[i]}:5000/api/get-node-temp`).then(body => {
-        await urllib.request('http://${podIpList[i]}:5000/api/get-node-temp').then(body => {
+        url = 'http://' + podIpList[i] + ":5000/api/get-node-temp"
+        await urllib.request(url).then(body => {
             result.push(JSON.parse(body));
         }).catch(err => {
             console.log(err);
