@@ -38,14 +38,14 @@ app.get('/api/get-cluster-temp', async (req, resp) => {
     var result = [];
     for (let i = 1; i < podIpList.length; i++) {
 //        await rp(`http://${podIpList[i]}:5000/api/get-node-temp`).then(body => {
-        url = 'http://' + podIpList[i] + ":5000/api/get-node-temp"
+        url = 'http://' + podIpList[i] + ':5000/api/get-node-temp';
         await urllib.request(url).then(body => {
-            result.push(JSON.parse(body));
+            result.push(JSON.parse(body.data));
         }).catch(err => {
             console.log(err);
         });
     }
-resp.json(result);
+    resp.json(result);
 });
 // All other routes return 404
 app.get('*', function(_req, res){
