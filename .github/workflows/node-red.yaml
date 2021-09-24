@@ -46,6 +46,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ${{ steps.prep.outputs.base_dir }}/
+          platforms: linux/arm64
           push: true
           tags: |
             mthorley/node-red:${{ github.sha }}
