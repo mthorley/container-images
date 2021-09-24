@@ -1,4 +1,4 @@
-FROM nodered/node-red:latest
+FROM nodered/node-red:2.0.6
 
 RUN npm install node-red-dashboard
 RUN npm install node-red-contrib-better-sonos@0.1.21
