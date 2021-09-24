@@ -3,7 +3,7 @@ FROM nodered/node-red:2.0.6
 RUN npm install node-red-dashboard
 RUN npm install node-red-contrib-better-sonos@0.1.21
 RUN npm install node-red-contrib-huemagic@2.8.6
-#RUN npm install node-red-contrib-suncron@1.4.4
+RUN npm install node-red-contrib-suncron@1.4.4
 #RUN npm install node-red-contrib-sunevents@2.0.3
 #RUN npm install node-red-contrib-tasmota@0.9.7
 #RUN npm install node-red-contrib-throttle@0.1.6
