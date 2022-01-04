@@ -1,13 +1,16 @@
 FROM arm64v8/ubuntu
 
-RUN apt update && apt install rsyslog -y
+RUN apt update && apt install rsyslog rsyslog-gnutls ca-certificates -y
 
-RUN echo '$ModLoad imudp \n\
-$UDPServerRun 514 \n\
-$ModLoad imtcp \n\
-$InputTCPServerRun 514 \n\
-$template RemoteStore, "/var/log/remote/%$year%/%$Month%/%$Day%/%$Hour%.log" \n\
-:source, !isequal, "localhost" -?RemoteStore \n\
-:source, isequal, "last" ~ ' > /etc/rsyslog.conf
+#RUN echo '$ModLoad imudp \n\
+#$UDPServerRun 514 \n\
+#$ModLoad imtcp \n\
+#$InputTCPServerRun 514 \n\
+#$template RemoteStore, "/var/log/remote/%$year%/%$Month%/%$Day%/%$Hour%.log" \n\
+#:source, !isequal, "localhost" -?RemoteStore \n\
+#:source, isequal, "last" ~ ' > /etc/rsyslog.conf
+
+COPY rsyslog.conf /etc/rsyslog.conf
+COPY datadog.conf /etc/rsyslog.d/datadog.conf
 
 ENTRYPOINT ["rsyslogd", "-n"]
