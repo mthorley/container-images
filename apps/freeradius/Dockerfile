@@ -1,15 +1,21 @@
-FROM arm64v8/ubuntu:latest
-RUN apt-get update && apt-get -y update
+FROM arm64v8/debian
 
-RUN install -d -o root -g root -m 0755 /etc/apt/keyrings
-RUN curl -s 'https://packages.networkradius.com/pgp/packages%40networkradius.com' | \
-    tee /etc/apt/keyrings/packages.networkradius.com.asc > /dev/null
+RUN apt-get update && \
+    apt-get -o Apt::Install-Recommends=0 install -y freeradius build-essential git && \
+    git clone https://github.com/Yelp/dumb-init.git /dumb-init && \
+    cd /dumb-init && \
+    make && \
+    cp dumb-init /sbin/dumb-init && \
+    cd / && \
+    rm -rf /dumb-init && \
+    apt-get remove --purge -y build-essential git && \
+    apt-get --purge -y autoremove && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /etc/freeradius/*
 
-RUN echo "deb [signed-by=/etc/apt/keyrings/packages.networkradius.com.asc] http://packages.networkradius.com/freeradius-3.2/ubuntu/jammy jammy main" | \
-    tee /etc/apt/sources.list.d/networkradius.list > /dev/null
+EXPOSE 1812/udp
 
-RUN apt-get install -y freeradius
+VOLUME /etc/freeradius
 
-EXPOSE 1812/udp 1813/udp
-
-CMD ["radiusd", "-X"]
+ENTRYPOINT ["/sbin/dumb-init"]
+CMD ["/usr/sbin/freeradius", "-f", "-d", "/etc/freeradius", "-X"]
