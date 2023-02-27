@@ -14,6 +14,7 @@ RUN apt-get update && \
     rm -rf /etc/freeradius/*
 
 EXPOSE 1812/udp
+EXPOSE 1813/udp
 
 VOLUME /etc/freeradius
 
