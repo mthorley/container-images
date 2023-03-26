@@ -24,5 +24,5 @@ ENTRYPOINT ["/tini", "--"]
 
 EXPOSE 8888
 
-CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root" \
-        "--certfile=/etc/ssl/private/tls.crt", "--keyfile=/etc/ssl/private/tls.key"]
+CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
+#        "--certfile=/etc/ssl/private/tls.crt", "--keyfile=/etc/ssl/private/tls.key"]
