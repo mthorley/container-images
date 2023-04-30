@@ -13,6 +13,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 #    rm -rf /etc/freeradius/*
 
+COPY eap /etc/freeradius/3.0/mods-available
+
 EXPOSE 1812/udp
 EXPOSE 1813/udp
 
