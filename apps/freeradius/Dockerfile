@@ -14,6 +14,7 @@ RUN apt-get update && \
 #    rm -rf /etc/freeradius/*
 
 COPY eap /etc/freeradius/3.0/mods-available
+COPY authorise /etc/freeradius/3.0/mods-config/files
 
 EXPOSE 1812/udp
 EXPOSE 1813/udp
