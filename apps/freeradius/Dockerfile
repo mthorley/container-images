@@ -16,7 +16,7 @@ RUN apt-get update && \
 EXPOSE 1812/udp
 EXPOSE 1813/udp
 
-VOLUME /etc/freeradius
+VOLUME /etc/freeradius/3.0
 
 ENTRYPOINT ["/sbin/dumb-init"]
-CMD ["/usr/sbin/freeradius", "-f", "-d", "/etc/freeradius", "-X"]
+CMD ["/usr/sbin/freeradius", "-f", "-d", "/etc/freeradius/3.0", "-X"]
